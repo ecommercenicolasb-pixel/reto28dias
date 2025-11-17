@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla Reto 28 Días - Ahorra para Transformarte</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .header h1 {
+            color: #667eea;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .meta-section {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .meta-section h2 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .meta-item label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .meta-item input, .meta-item textarea {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        .meta-item input:focus, .meta-item textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-card .label {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        
+        .stat-card .value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .progress-section {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar-container {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            transition: width 0.3s ease;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: #667eea;
+            color: white;
+        }
+        
+        th {
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9ff;
+        }
+        
+        .input-cell {
+            width: 100px;
+        }
+        
+        .input-cell input {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+        
+        .input-cell input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .checkbox-cell {
+            text-align: center;
+        }
+        
+        .checkbox-cell input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .week-header {
+            background: #764ba2;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .btn-calculate {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-calculate:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .notes-section {
+            margin-top: 30px;
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #ffc107;
+        }
+        
+        .notes-section h3 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+        
+        .notes-section textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 2px solid #ffe082;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌟 RETO 28 DÍAS - AHORRA PARA TRANSFORMARTE</h1>
+            <p>Plantilla de Seguimiento Personal</p>
+        </div>
+        
+        <div class="meta-section">
+            <h2>📋 Información de tu Reto</h2>
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <label>Nombre del Participante:</label>
+                    <input type="text" id="nombre" placeholder="Tu nombre">
+                </div>
+                <div class="meta-item">
+                    <label>Fecha de Inicio:</label>
+                    <input type="date" id="fechaInicio">
+                </div>
+                <div class="meta-item">
+                    <label>Meta de Ahorro Total ($):</label>
+                    <input type="number" id="metaTotal" placeholder="Ej: 500" step="0.01">
+                </div>
+                <div class="meta-item">
+                    <label>Aporte Mínimo Diario ($):</label>
+                    <input type="number" id="aporteMinimo" placeholder="Ej: 17.86" step="0.01">
+                </div>
+                <div class="meta-item" style="grid-column: 1 / -1;">
+                    <label>Propósito de tu Ahorro:</label>
+                    <textarea id="proposito" rows="2" placeholder="Este ahorro será para _______ porque _______"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="label">Total Ahorrado</div>
+                <div class="value">$<span id="totalAhorrado">0.00</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Días Completados</div>
+                <div class="value"><span id="diasCompletados">0</span>/28</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Falta para Meta</div>
+                <div class="value">$<span id="faltaMeta">0.00</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Progreso</div>
+                <div class="value"><span id="porcentaje">0</span>%</div>
+            </div>
+        </div>
+        
+        <div class="progress-section">
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar" style="width: 0%">0%</div>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table id="tablaReto">
+                <thead>
+                    <tr>
+                        <th>Día</th>
+                        <th>Fecha</th>
+                        <th>Macro-tarea</th>
+                        <th class="input-cell">Ahorro del Día ($)</th>
+                        <th>Completado</th>
+                        <th>Total Acumulado ($)</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaBody">
+                    <!-- Se llenará con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        
+        <button class="btn-calculate" onclick="calcularTotales()">📊 Calcular Progreso</button>
+        
+        <div class="notes-section">
+            <h3>📝 Notas y Reflexiones del Reto</h3>
+            <textarea id="notas" placeholder="Escribe aquí tus aprendizajes, desafíos superados, patrones identificados, etc."></textarea>
+        </div>
+    </div>
+
+    <script>
+        const macroTareas = [
+            // Semana 1
+            { semana: 1, dia: 1, tarea: "Declaración de Meta y Compromiso" },
+            { semana: 1, dia: 2, tarea: "Radiografía Financiera Premium" },
+            { semana: 1, dia: 3, tarea: "Diseño de Tu Meta Semanal" },
+            { semana: 1, dia: 4, tarea: "Estructura de Ahorro Diario" },
+            { semana: 1, dia: 5, tarea: "Reducción Estratégica Inteligente" },
+            { semana: 1, dia: 6, tarea: "Sistema de Priorización Financiera" },
+            { semana: 1, dia: 7, tarea: "Cierre de Semana 1" },
+            // Semana 2
+            { semana: 2, dia: 8, tarea: "Automatización Estratégica" },
+            { semana: 2, dia: 9, tarea: "Optimización Inteligente del Consumo" },
+            { semana: 2, dia: 10, tarea: "Evaluación Emocional Profunda" },
+            { semana: 2, dia: 11, tarea: "Reestructuración de Gastos Variables" },
+            { semana: 2, dia: 12, tarea: "Activación de Recursos Dormidos" },
+            { semana: 2, dia: 13, tarea: "Incremento Controlado del Ahorro" },
+            { semana: 2, dia: 14, tarea: "Cierre de Semana 2" },
+            // Semana 3
+            { semana: 3, dia: 15, tarea: "Revisión Estratégica Premium" },
+            { semana: 3, dia: 16, tarea: "Micro-Ingresos Estratégicos" },
+            { semana: 3, dia: 17, tarea: "Duplicación Estratégica" },
+            { semana: 3, dia: 18, tarea: "Renovación de Creencias Financieras" },
+            { semana: 3, dia: 19, tarea: "Avance Contundente" },
+            { semana: 3, dia: 20, tarea: "Organización Avanzada" },
+            { semana: 3, dia: 21, tarea: "Cierre de Semana 3" },
+            // Semana 4
+            { semana: 4, dia: 22, tarea: "Ajuste Final Estratégico" },
+            { semana: 4, dia: 23, tarea: "Aporte Extra Consciente" },
+            { semana: 4, dia: 24, tarea: "Revisión Integral del Sistema" },
+            { semana: 4, dia: 25, tarea: "Preparación para el Cierre" },
+            { semana: 4, dia: 26, tarea: "Cierre Matemático" },
+            { semana: 4, dia: 27, tarea: "Celebración Consciente" },
+            { semana: 4, dia: 28, tarea: "Expansión y Nuevo Inicio" }
+        ];
+
+        function inicializarTabla() {
+            const tbody = document.getElementById('tablaBody');
+            let semanaActual = 0;
+            
+            macroTareas.forEach((item, index) => {
+                if (item.semana !== semanaActual) {
+                    const weekRow = tbody.insertRow();
+                    weekRow.className = 'week-header';
+                    const weekCell = weekRow.insertCell(0);
+                    weekCell.colSpan = 6;
+                    weekCell.textContent = `SEMANA ${item.semana}`;
+                    semanaActual = item.semana;
+                }
+                
+                const row = tbody.insertRow();
+                row.insertCell(0).textContent = `Día ${item.dia}`;
+                row.insertCell(1).innerHTML = `<input type="date" id="fecha${item.dia}" style="width: 100%; padding: 4px; border: 1px solid #e0e0e0; border-radius: 4px;">`;
+                row.insertCell(2).textContent = item.tarea;
+                row.insertCell(3).innerHTML = `<div class="input-cell"><input type="number" id="ahorro${item.dia}" step="0.01" placeholder="0.00" onchange="calcularTotales()"></div>`;
+                row.insertCell(4).innerHTML = `<div class="checkbox-cell"><input type="checkbox" id="check${item.dia}" onchange="calcularTotales()"></div>`;
+                row.insertCell(5).innerHTML = `<span id="acum${item.dia}">$0.00</span>`;
+            });
+        }
+
+        function calcularTotales() {
+            let totalAhorrado = 0;
+            let diasCompletados = 0;
+            
+            for (let i = 1; i <= 28; i++) {
+                const ahorro = parseFloat(document.getElementById(`ahorro${i}`).value) || 0;
+                const completado = document.getElementById(`check${i}`).checked;
+                
+                totalAhorrado += ahorro;
+                
+                document.getElementById(`acum${i}`).textContent = `$${totalAhorrado.toFixed(2)}`;
+                
+                if (completado) diasCompletados++;
+            }
+            
+            const metaTotal = parseFloat(document.getElementById('metaTotal').value) || 0;
+            const faltaMeta = Math.max(0, metaTotal - totalAhorrado);
+            const porcentaje = metaTotal > 0 ? Math.min(100, (totalAhorrado / metaTotal * 100)) : 0;
+            
+            document.getElementById('totalAhorrado').textContent = totalAhorrado.toFixed(2);
+            document.getElementById('diasCompletados').textContent = diasCompletados;
+            document.getElementById('faltaMeta').textContent = faltaMeta.toFixed(2);
+            document.getElementById('porcentaje').textContent = porcentaje.toFixed(1);
+            
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = porcentaje + '%';
+            progressBar.textContent = porcentaje.toFixed(1) + '%';
+            
+            guardarDatos();
+        }
+
+        function guardarDatos() {
+            const datos = {
+                nombre: document.getElementById('nombre').value,
+                fechaInicio: document.getElementById('fechaInicio').value,
+                metaTotal: document.getElementById('metaTotal').value,
+                aporteMinimo: document.getElementById('aporteMinimo').value,
+                proposito: document.getElementById('proposito').value,
+                notas: document.getElementById('notas').value,
+                ahorros: {},
+                checks: {},
+                fechas: {}
+            };
+            
+            for (let i = 1; i <= 28; i++) {
+                datos.ahorros[i] = document.getElementById(`ahorro${i}`).value;
+                datos.checks[i] = document.getElementById(`check${i}`).checked;
+                datos.fechas[i] = document.getElementById(`fecha${i}`).value;
+            }
+            
+            localStorage.setItem('reto28dias', JSON.stringify(datos));
+        }
+
+        function cargarDatos() {
+            const datos = JSON.parse(localStorage.getItem('reto28dias'));
+            if (datos) {
+                document.getElementById('nombre').value = datos.nombre || '';
+                document.getElementById('fechaInicio').value = datos.fechaInicio || '';
+                document.getElementById('metaTotal').value = datos.metaTotal || '';
+                document.getElementById('aporteMinimo').value = datos.aporteMinimo || '';
+                document.getElementById('proposito').value = datos.proposito || '';
+                document.getElementById('notas').value = datos.notas || '';
+                
+                for (let i = 1; i <= 28; i++) {
+                    if (datos.ahorros[i]) document.getElementById(`ahorro${i}`).value = datos.ahorros[i];
+                    if (datos.checks[i]) document.getElementById(`check${i}`).checked = datos.checks[i];
+                    if (datos.fechas[i]) document.getElementById(`fecha${i}`).value = datos.fechas[i];
+                }
+                
+                calcularTotales();
+            }
+        }
+
+        document.getElementById('nombre').addEventListener('change', guardarDatos);
+        document.getElementById('fechaInicio').addEventListener('change', guardarDatos);
+        document.getElementById('metaTotal').addEventListener('change', guardarDatos);
+        document.getElementById('aporteMinimo').addEventListener('change', guardarDatos);
+        document.getElementById('proposito').addEventListener('change', guardarDatos);
+        document.getElementById('notas').addEventListener('change', guardarDatos);
+
+        window.onload = function() {
+            inicializarTabla();
+            cargarDatos();
+        };
+    </script>
+</body>
+</html>
